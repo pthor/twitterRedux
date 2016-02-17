@@ -1,3 +1,4 @@
+
 //
 //  ViewController.swift
 //  TwitterThor
@@ -9,10 +10,21 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
 
+    @IBAction func onLoginBtnTouched(sender: AnyObject) {
+        //TODO make this user.loginWithCompletion
+        TwitterClient.loginWithCompletion(){
+            (user: User?, error: NSError?) in
+            if user != nil{
+                self.performSegueWithIdentifier("loginSeque", sender: self)
+            }else{
+                // handle login error
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
