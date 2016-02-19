@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import AFNetworking
+import BDBOAuth1Manager
 
 
 class TwitterClient: BDBOAuth1RequestOperationManager {
