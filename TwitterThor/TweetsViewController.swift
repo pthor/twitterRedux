@@ -15,21 +15,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 180
-
-        // Do any additional setup after loading the view.
-        TwitterClient.homeTimelineWithParams(nil, completion: {(tweets, error) ->() in
-            if let newTweets = tweets{
-                self.tweets = newTweets
-                self.tableView.reloadData()
-            }else{
-                print("error: \(error?.description)")
-            }
+        getLatestTweets()
         
-        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +33,20 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func onLogoutTouch(sender: AnyObject) {
         User.logout()
+    }
+    
+    func getLatestTweets(){
+        print("get latest")
+        // Do any additional setup after loading the view.
+        TwitterClient.homeTimelineWithParams(nil, completion: {(tweets, error) ->() in
+            if let newTweets = tweets{
+                self.tweets = newTweets
+                self.tableView.reloadData()
+            }else{
+                print("error: \(error?.description)")
+            }
+            
+        })
     }
     
     
@@ -51,6 +59,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
  as! BasicTweetTableViewCell
         tweetCell.tweet = tweets![indexPath.row]
         return tweetCell
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        getLatestTweets()
+
+        // Tell the refreshControl to stop spinning
+        refreshControl.endRefreshing()
     }
 
     /*
