@@ -22,8 +22,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.delegate = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 180
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "getLatestTweets", name: userDidTweetNotification, object: nil)
+
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        print("viewWillAppear")
         getLatestTweets()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,7 +53,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             
         })
     }
-    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets?.count ?? 0

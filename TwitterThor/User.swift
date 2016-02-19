@@ -12,6 +12,7 @@ var _currentUser: User?
 let currentUserKey = "com.pthormahlen.User.key"
 let userDidLoginNotification = "userDidLoginNotification"
 let userDidLogoutnNotification = "userDidLogoutnNotification"
+let userDidTweetNotification = "userDidTweetNotification"
 
 
 class User: NSObject {
@@ -36,6 +37,15 @@ class User: NSObject {
         TwitterClient.logout()
         let notification = NSNotification(name: userDidLogoutnNotification, object: nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
+    }
+    
+    static func postTweet(tweetText: String){
+        TwitterClient.postTweet(tweetText){
+            print("send notification")
+            let notification = NSNotification(name: userDidTweetNotification, object: nil)
+            NSNotificationCenter.defaultCenter().postNotification(notification)
+        }
+        
     }
     
     class var currentUser: User?{

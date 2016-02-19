@@ -18,6 +18,7 @@
 		DAEE26581C7424180098F4F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE26571C7424180098F4F2 /* User.swift */; };
 		DAEE265B1C74422A0098F4F2 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE265A1C74422A0098F4F2 /* TweetsViewController.swift */; };
 		DAEE26821C76BBB40098F4F2 /* BasicTweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE26811C76BBB40098F4F2 /* BasicTweetTableViewCell.swift */; };
+		DAEE26871C76DC470098F4F2 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE26861C76DC470098F4F2 /* ComposeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		DAEE26571C7424180098F4F2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DAEE265A1C74422A0098F4F2 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		DAEE26811C76BBB40098F4F2 /* BasicTweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTweetTableViewCell.swift; sourceTree = "<group>"; };
+		DAEE26861C76DC470098F4F2 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		EF0ED85D1CFF161DDC369780 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 			children = (
 				DAEE263E1C72B8590098F4F2 /* ViewController.swift */,
 				DAEE265A1C74422A0098F4F2 /* TweetsViewController.swift */,
+				DAEE26861C76DC470098F4F2 /* ComposeViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				DAEE265B1C74422A0098F4F2 /* TweetsViewController.swift in Sources */,
 				DAEE263D1C72B8590098F4F2 /* AppDelegate.swift in Sources */,
 				DAEE26581C7424180098F4F2 /* User.swift in Sources */,
+				DAEE26871C76DC470098F4F2 /* ComposeViewController.swift in Sources */,
 				DAEE26561C7424100098F4F2 /* Tweet.swift in Sources */,
 				DAEE26821C76BBB40098F4F2 /* BasicTweetTableViewCell.swift in Sources */,
 			);

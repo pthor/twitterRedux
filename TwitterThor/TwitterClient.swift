@@ -23,6 +23,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     static let oauthRequestTokenPath = "oauth/request_token"
     static let accountCredentialsPath = "/1.1/account/verify_credentials.json"
     static let homeTimelinePath = "/1.1/statuses/home_timeline.json"
+    static let newTweetPath = "/1.1/statuses/update.json"
     
     var loginCompletionBlock: ((user: User?, error: NSError?) -> ())?
     
@@ -50,6 +51,19 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 print("#FAIL failed to get user detail: \(error.localizedDescription)")
                 TwitterClient.sharedInstance.loginCompletionBlock!(user:nil, error: error)
             })
+    }
+    
+    static func postTweet(tweetText:String, onSuccessBlock: ()->()){
+        var paramaters = [String:String]()
+        paramaters["status"] = tweetText
+        TwitterClient.sharedInstance.POST(newTweetPath, parameters: paramaters, constructingBodyWithBlock: { (operation:AFMultipartFormData) -> Void in
+            //noop
+            }, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+                onSuccessBlock()
+                print("You tweeted \(tweetText) !! ")
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("failed to post tweet")
+        }
     }
     
     static func homeTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()){
