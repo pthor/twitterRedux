@@ -38,6 +38,13 @@ class TweetDetailView: UIView{
         
     }
     
+    @IBAction func tapLike(sender: UIButton) {
+        print("like")
+        if let likeedImage = UIImage(named: "like-action-on"){
+            sender.setImage(likeedImage, forState: .Normal)
+        }
+    }
+    
     /**
      - parameter duration: custom animation duration
      */
