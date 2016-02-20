@@ -48,6 +48,14 @@ class User: NSObject {
         
     }
     
+    static func likeTweet(tweet: Tweet){
+        TwitterClient.likeTweet(tweet){
+            print("User liked tweet")
+            //let notification = NSNotification(name: userDidTweetNotification, object: nil)
+            //NSNotificationCenter.defaultCenter().postNotification(notification)
+        }
+    }
+    
     class var currentUser: User?{
         get{
             if _currentUser == nil {

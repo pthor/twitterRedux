@@ -15,12 +15,29 @@ class TweetDetailView: UIView{
     @IBOutlet weak var tweetUserFullNameLabel: UILabel!
     @IBOutlet weak var tweetUserNameLabel: UILabel!
     @IBOutlet weak var tweedAtTimeLabel: UILabel!
-
+    @IBOutlet weak var likeTweetButton: UIButton!
+    
+    var userDidLikeTweet = false
+    
     var tweet: Tweet!{
         didSet{
+            print("Updagte tweet detail view")
             tweetUserAvatarImage.image = nil
             tweetMessageLabel.text = tweet.text
             tweedAtTimeLabel.text = tweet.createdAt!.shortTimeAgoSinceNow()
+            //TODO
+            if tweet.liked{
+                if let likeedImage = UIImage(named: "like-action-on"){
+                   self.likeTweetButton.setImage(likeedImage, forState: .Normal)
+                }
+            }
+            else{
+                let likeedImage = UIImage(named: "like-action")
+                if likeedImage != nil && likeTweetButton != nil{
+                    self.likeTweetButton.setImage(likeedImage, forState: .Normal)
+                }
+            }
+
             if(tweet.user != nil ){
                 tweetUserFullNameLabel.text = tweet.user!.name
                 tweetUserNameLabel.text = tweet.user!.screenname
@@ -39,10 +56,21 @@ class TweetDetailView: UIView{
     }
     
     @IBAction func tapLike(sender: UIButton) {
-        print("like")
-        if let likeedImage = UIImage(named: "like-action-on"){
-            sender.setImage(likeedImage, forState: .Normal)
+        if(tweet != nil){
+            if(userDidLikeTweet)
+            {
+                print("unlike")
+                //TODO unlike
+            }
+            else{
+                print("like")
+                if let likeedImage = UIImage(named: "like-action-on"){
+                    sender.setImage(likeedImage, forState: .Normal)
+                }
+                User.likeTweet(tweet)
+            }
         }
+        
     }
     
     /**

@@ -24,6 +24,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     static let accountCredentialsPath = "/1.1/account/verify_credentials.json"
     static let homeTimelinePath = "/1.1/statuses/home_timeline.json"
     static let newTweetPath = "/1.1/statuses/update.json"
+    static let likeTweetPath = "1.1/favorites/create.json"
     
     var loginCompletionBlock: ((user: User?, error: NSError?) -> ())?
     
@@ -63,6 +64,20 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 print("You tweeted \(tweetText) !! ")
             }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("failed to post tweet")
+        }
+    }
+    
+    static func likeTweet(tweet:Tweet, onSuccessBlock: ()->()){
+        var paramaters = [String:String]()
+        paramaters["id"] = tweet.id_str
+        print("POST like tweet \(paramaters["id"])")
+        TwitterClient.sharedInstance.POST(likeTweetPath, parameters: paramaters, constructingBodyWithBlock: { (operation:AFMultipartFormData) -> Void in
+            //noop
+            }, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+                onSuccessBlock()
+                print("You like \(tweet.text) !! ")
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("failed to like tweet. \(error.debugDescription) ")
         }
     }
     

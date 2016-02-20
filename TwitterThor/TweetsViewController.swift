@@ -48,7 +48,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let tapPoint = sender.locationInView(tweetContainerView)
         if (tapPoint.y < 0 || tapPoint.y > tweetContainerView.frame.height){
             tweetDetailView.fadeOut()
+            getLatestTweets()
         }
+        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

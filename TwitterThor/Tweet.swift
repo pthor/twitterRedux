@@ -9,9 +9,12 @@
 import UIKit
 
 class Tweet: NSObject {
+    
+    var id_str: String?
     var user: User?
     var text: String?
     var createdAtString: String?
+    var liked: Bool = false
     
     lazy var createdAt: NSDate? = {
         Tweet.dateFormatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
@@ -23,9 +26,13 @@ class Tweet: NSObject {
     
     init(dictionary: NSDictionary){
         self.dictionary = dictionary
+        //print(dictionary)
+        id_str = dictionary["id_str"] as? String
         user = User(dictionary: dictionary["user"] as! NSDictionary)
         text = dictionary["text"] as? String
         createdAtString = dictionary["created_at"] as? String
+        liked = dictionary["favorited"] as! Bool
+        print("did user like tweet \(id_str): \(liked)?")
         
     }
     
