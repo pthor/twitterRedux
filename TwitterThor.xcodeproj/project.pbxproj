@@ -19,6 +19,9 @@
 		DAEE265B1C74422A0098F4F2 /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE265A1C74422A0098F4F2 /* TweetsViewController.swift */; };
 		DAEE26821C76BBB40098F4F2 /* BasicTweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE26811C76BBB40098F4F2 /* BasicTweetTableViewCell.swift */; };
 		DAEE26871C76DC470098F4F2 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE26861C76DC470098F4F2 /* ComposeViewController.swift */; };
+		DAEE26891C7812EF0098F4F2 /* TweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE26881C7812EF0098F4F2 /* TweetDetailViewController.swift */; };
+		DAEE268B1C781C3D0098F4F2 /* TweetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE268A1C781C3D0098F4F2 /* TweetDetailView.swift */; };
+		DAEE268D1C7820550098F4F2 /* TweetDetailContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE268C1C7820550098F4F2 /* TweetDetailContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		DAEE265A1C74422A0098F4F2 /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		DAEE26811C76BBB40098F4F2 /* BasicTweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTweetTableViewCell.swift; sourceTree = "<group>"; };
 		DAEE26861C76DC470098F4F2 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		DAEE26881C7812EF0098F4F2 /* TweetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailViewController.swift; sourceTree = "<group>"; };
+		DAEE268A1C781C3D0098F4F2 /* TweetDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailView.swift; sourceTree = "<group>"; };
+		DAEE268C1C7820550098F4F2 /* TweetDetailContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailContainerView.swift; sourceTree = "<group>"; };
 		EF0ED85D1CFF161DDC369780 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +134,7 @@
 				DAEE263E1C72B8590098F4F2 /* ViewController.swift */,
 				DAEE265A1C74422A0098F4F2 /* TweetsViewController.swift */,
 				DAEE26861C76DC470098F4F2 /* ComposeViewController.swift */,
+				DAEE26881C7812EF0098F4F2 /* TweetDetailViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -136,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				DAEE26811C76BBB40098F4F2 /* BasicTweetTableViewCell.swift */,
+				DAEE268A1C781C3D0098F4F2 /* TweetDetailView.swift */,
+				DAEE268C1C7820550098F4F2 /* TweetDetailContainerView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -264,12 +273,15 @@
 			files = (
 				DAEE263F1C72B8590098F4F2 /* ViewController.swift in Sources */,
 				DAEE26531C72BC1C0098F4F2 /* TwitterClient.swift in Sources */,
+				DAEE26891C7812EF0098F4F2 /* TweetDetailViewController.swift in Sources */,
 				DAEE265B1C74422A0098F4F2 /* TweetsViewController.swift in Sources */,
 				DAEE263D1C72B8590098F4F2 /* AppDelegate.swift in Sources */,
 				DAEE26581C7424180098F4F2 /* User.swift in Sources */,
 				DAEE26871C76DC470098F4F2 /* ComposeViewController.swift in Sources */,
+				DAEE268B1C781C3D0098F4F2 /* TweetDetailView.swift in Sources */,
 				DAEE26561C7424100098F4F2 /* Tweet.swift in Sources */,
 				DAEE26821C76BBB40098F4F2 /* BasicTweetTableViewCell.swift in Sources */,
+				DAEE268D1C7820550098F4F2 /* TweetDetailContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,10 +29,6 @@ class BasicTweetTableViewCell: UITableViewCell {
                 }
                 
             }
-//            categoriesLabel.text = tweet.categories
-//            addressLabel.text = tweet.address
-            //reviewsCountLabel.text = "\(tweet.reviewCount!) retweeted"
-            //distanceLabel.text = tweet.distance
         }
     }
     
