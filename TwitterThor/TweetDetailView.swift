@@ -16,28 +16,19 @@ class TweetDetailView: UIView{
     @IBOutlet weak var tweetUserNameLabel: UILabel!
     @IBOutlet weak var tweedAtTimeLabel: UILabel!
     @IBOutlet weak var likeTweetButton: UIButton!
+    @IBOutlet weak var reweetButton: UIButton!
     
     var userDidLikeTweet = false
+    var userDidRetweet = false
     
     var tweet: Tweet!{
         didSet{
-            print("Updagte tweet detail view")
+            print("Update tweet detail view")
             tweetUserAvatarImage.image = nil
             tweetMessageLabel.text = tweet.text
             tweedAtTimeLabel.text = tweet.createdAt!.shortTimeAgoSinceNow()
-            //TODO
-            if tweet.liked{
-                if let likeedImage = UIImage(named: "like-action-on"){
-                   self.likeTweetButton.setImage(likeedImage, forState: .Normal)
-                }
-            }
-            else{
-                let likeedImage = UIImage(named: "like-action")
-                if likeedImage != nil && likeTweetButton != nil{
-                    self.likeTweetButton.setImage(likeedImage, forState: .Normal)
-                }
-            }
-
+            self.setLikeButtonState(tweet)
+            self.setRetweetButtonState(tweet)
             if(tweet.user != nil ){
                 tweetUserFullNameLabel.text = tweet.user!.name
                 tweetUserNameLabel.text = tweet.user!.screenname
@@ -55,12 +46,31 @@ class TweetDetailView: UIView{
         
     }
     
+    func setLikeButtonState(tweetToDisplay: Tweet){
+        let buttonInfo = LikeButton()
+        let image =  tweetToDisplay.liked ? buttonInfo.selectedBackgroundImage : buttonInfo.defaultBackgroundImage
+        self.setButtonState(image, button: self.likeTweetButton, buttonInfo: buttonInfo)
+
+    }
+    
+    func setRetweetButtonState(tweetToDisplay: Tweet){
+        let buttonInfo = RetweetButton()
+        let image =  tweetToDisplay.retweeted ? buttonInfo.selectedBackgroundImage : buttonInfo.defaultBackgroundImage
+        self.setButtonState(image, button: self.reweetButton, buttonInfo: buttonInfo)
+    }
+    
+    func setButtonState(image: UIImage?, button: UIButton?,buttonInfo: TwitterActionButton){
+        if image != nil && button != nil{
+            button!.setImage(image!, forState: .Normal)
+        }
+    }
+    
     @IBAction func tapLike(sender: UIButton) {
         if(tweet != nil){
             if(userDidLikeTweet)
             {
-                print("unlike")
                 //TODO unlike
+                print("unlike")
             }
             else{
                 print("like")
@@ -68,6 +78,26 @@ class TweetDetailView: UIView{
                     sender.setImage(likeedImage, forState: .Normal)
                 }
                 User.likeTweet(tweet)
+            }
+        }
+        
+    }
+    
+    
+    @IBAction func tapRetweet(sender: UIButton) {
+        if(tweet != nil){
+            if(userDidRetweet)
+            {
+                print("unretweet")
+                //TODO unlike
+            }
+            else{
+                userDidRetweet = true
+                print("retwteet")
+                if let likeedImage = RetweetButton().selectedBackgroundImage{
+                    sender.setImage(likeedImage, forState: .Normal)
+                }
+                User.retweet(tweet)
             }
         }
         
@@ -93,4 +123,33 @@ class TweetDetailView: UIView{
         })
     }
 
+}
+
+class TwitterActionButton: NSObject{
+    var defaultBackgroundImage: UIImage? = nil
+    var selectedBackgroundImage: UIImage? = nil
+}
+
+class LikeButton: TwitterActionButton{
+    override init(){
+        super.init()
+        self.defaultBackgroundImage =  UIImage(named: "like-action")
+        self.selectedBackgroundImage = UIImage(named: "like-action-on")
+    }
+}
+
+class RetweetButton: TwitterActionButton{
+    override init(){
+        super.init()
+        self.defaultBackgroundImage =  UIImage(named: "retweet-action")
+        self.selectedBackgroundImage = UIImage(named: "retweet-action-on")
+    }
+}
+
+class ReplyButton: TwitterActionButton{
+    override init(){
+        super.init()
+        self.defaultBackgroundImage =  UIImage(named: "reply-action_0")
+        self.selectedBackgroundImage = UIImage(named: "reply-action-pressed_0")
+    }
 }

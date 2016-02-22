@@ -25,6 +25,10 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     static let homeTimelinePath = "/1.1/statuses/home_timeline.json"
     static let newTweetPath = "/1.1/statuses/update.json"
     static let likeTweetPath = "1.1/favorites/create.json"
+    static func retweetPath(tweetID: String?) -> String{
+        print("/1.1/statuses/retweet/\(tweetID!).json")
+      return "/1.1/statuses/retweet/\(tweetID!).json"
+    }
     
     var loginCompletionBlock: ((user: User?, error: NSError?) -> ())?
     
@@ -78,6 +82,20 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 print("You like \(tweet.text) !! ")
             }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("failed to like tweet. \(error.debugDescription) ")
+        }
+    }
+    
+    static func retweet(tweet:Tweet, onSuccessBlock: ()->()){
+        var paramaters = [String:String]()
+        paramaters["id"] = tweet.id_str
+        print("POST retweet\(paramaters["id"])")
+        TwitterClient.sharedInstance.POST(retweetPath(paramaters["id"]), parameters: paramaters, constructingBodyWithBlock: { (operation:AFMultipartFormData) -> Void in
+            //noop
+            }, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+                onSuccessBlock()
+                print("You retweeted \(tweet.text) !! ")
+            }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("failed to retweet. \(error.debugDescription) ")
         }
     }
     

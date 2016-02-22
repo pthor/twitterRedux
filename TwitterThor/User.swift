@@ -56,6 +56,14 @@ class User: NSObject {
         }
     }
     
+    static func retweet(tweet: Tweet){
+        TwitterClient.retweet(tweet){
+            print("User retweeted the tweet")
+            //let notification = NSNotification(name: userDidTweetNotification, object: nil)
+            //NSNotificationCenter.defaultCenter().postNotification(notification)
+        }
+    }
+    
     class var currentUser: User?{
         get{
             if _currentUser == nil {

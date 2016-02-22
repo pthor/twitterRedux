@@ -45,6 +45,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     @IBAction func tapOut(sender: AnyObject) {
+        print("Close the tweet")
         let tapPoint = sender.locationInView(tweetContainerView)
         if (tapPoint.y < 0 || tapPoint.y > tweetContainerView.frame.height){
             tweetDetailView.fadeOut()

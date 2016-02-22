@@ -15,6 +15,7 @@ class Tweet: NSObject {
     var text: String?
     var createdAtString: String?
     var liked: Bool = false
+    var retweeted: Bool = false
     
     lazy var createdAt: NSDate? = {
         Tweet.dateFormatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
@@ -32,7 +33,9 @@ class Tweet: NSObject {
         text = dictionary["text"] as? String
         createdAtString = dictionary["created_at"] as? String
         liked = dictionary["favorited"] as! Bool
+        retweeted = dictionary["retweeted"] as! Bool
         print("did user like tweet \(id_str): \(liked)?")
+        print("did user retweet \(id_str): \(retweeted)?")
         
     }
     

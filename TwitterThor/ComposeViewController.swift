@@ -19,6 +19,20 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tweetMessageTextField.contentVerticalAlignment = UIControlContentVerticalAlignment.Top
+        
+        let user = User.currentUser
+        
+        if(user != nil ){
+            userFullNameLabel.text = user!.name
+            userNameLabel.text = user!.screenname
+            if (user!.profileImageUrl != nil){
+                let avatarImage = NSURL(string: user!.profileImageUrl!)
+                if avatarImage != nil{
+                    userProfileImage.setImageWithURL(avatarImage!)
+                }
+            }
+        }
+
     
     }
     
