@@ -18,6 +18,23 @@ class BasicTweetTableViewCell: UITableViewCell {
             tweetUserAvatarImage.image = nil
             tweetMessageLabel.text = tweet.text
             tweedAtTimeLabel.text = tweet.createdAt!.shortTimeAgoSinceNow()
+            likesCountLabel.text = "\(tweet.favouritesCount)"
+            retweetsCountLabel.text = "\(tweet.retweetCount)"
+            
+            if(likeButton != nil && tweet.liked){
+                likeButton!.setImage(LikeButton().selectedBackgroundImage, forState: .Normal)
+            }
+            else{
+                likeButton!.setImage(LikeButton().defaultBackgroundImage, forState: .Normal)
+            }
+            
+            if(retweetButton != nil && tweet.retweeted){
+                retweetButton!.setImage(RetweetButton().selectedBackgroundImage, forState: .Normal)
+            }
+            else{
+                retweetButton!.setImage(RetweetButton().defaultBackgroundImage, forState: .Normal)
+            }
+            
             if(tweet.user != nil ){
                 tweetUserFullNameLabel.text = tweet.user!.name
                 tweetUserNameLabel.text = tweet.user!.screenname
@@ -37,13 +54,26 @@ class BasicTweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetUserFullNameLabel: UILabel!
     @IBOutlet weak var tweetUserNameLabel: UILabel!
     @IBOutlet weak var tweedAtTimeLabel: UILabel!
+    @IBOutlet weak var retweetsCountLabel: UILabel!
+    @IBOutlet weak var likesCountLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
+    
+    @IBAction func onLikeButtonTap(sender: AnyObject) {
+        User.likeTweet(tweet)
+    }
+
+
+    @IBAction func onRetweetTap(sender: AnyObject) {
+         User.retweet(tweet)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         tweetUserAvatarImage.layer.cornerRadius = 5
         tweetUserAvatarImage.clipsToBounds = true
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
