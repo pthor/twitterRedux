@@ -16,15 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutnNotification, object: nil)
         
-        if User.currentUser != nil{
-            // go to the logged in screen
-            print("current user detected")
-            let vc = storyboard.instantiateViewControllerWithIdentifier("TweetsNavigationController") as UIViewController
-            window?.rootViewController = vc
-        }
+         //Override point for customization after application launch.
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutnNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLogin", name: userDidLogInNotification, object: nil)
+        print("didFinishLaunchingWithOptions!")
+        userLogin()
         return true
     }
     
@@ -32,6 +29,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = storyboard.instantiateInitialViewController()! as UIViewController
         window?.rootViewController = vc
 
+    }
+    
+    func userLogin(){
+        if User.currentUser != nil{
+            // go to the logged in screen
+            print("current user detected")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let hambugerViewController = storyboard.instantiateViewControllerWithIdentifier("HambergerViewController") as! HambergerViewController
+            window?.rootViewController = hambugerViewController
+            //let hambugerViewController = window!.rootViewController as! HambergerViewController
+            let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+            
+            menuViewController.hamburgerViewController = hambugerViewController
+            hambugerViewController.menuViewController = menuViewController
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

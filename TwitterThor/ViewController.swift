@@ -9,6 +9,8 @@
 
 import UIKit
 
+let userDidLogInNotification = "userDidLogoutInNotification"
+
 class ViewController: UIViewController {
     
 
@@ -17,7 +19,11 @@ class ViewController: UIViewController {
         TwitterClient.loginWithCompletion(){
             (user: User?, error: NSError?) in
             if user != nil{
-                self.performSegueWithIdentifier("loginSeque", sender: self)
+                let notification = NSNotification(name: userDidLogInNotification, object: nil)
+                NSNotificationCenter.defaultCenter().postNotification(notification)
+
+                
+
             }else{
                 // handle login error
             }
