@@ -63,10 +63,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
-    @IBAction func onLogoutTouch(sender: AnyObject) {
-        User.logout()
-    }
-    
     func customizeNavbar(){
         let nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.Default

@@ -71,7 +71,7 @@ class HambergerViewController: UIViewController {
             
             UIView.animateWithDuration(0.3, animations:{
                 if velocity.x > 0 {
-                    self.leftMarginConstraint.constant = self.view.frame.size.width - 50
+                    self.leftMarginConstraint.constant = self.view.frame.size.width - (self.view.frame.size.width/2)
                 }else{
                     self.leftMarginConstraint.constant = 0
                 }

@@ -18,16 +18,17 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     
     static let oauthCallbackUrl =  NSURL(string: "twitterthor://oath")
     
-    static let twitterBaseURL = NSURL(string:"https://api.twitter.com/")!
-    static let twitterAuthorizePath = NSURL(string:"oauth/authorize")!
-    static let oauthRequestTokenPath = "oauth/request_token"
+    static let twitterBaseURL =         NSURL(string:"https://api.twitter.com/")!
+    static let twitterAuthorizePath =   NSURL(string:"oauth/authorize")!
+    static let oauthRequestTokenPath =  "oauth/request_token"
     static let accountCredentialsPath = "/1.1/account/verify_credentials.json"
-    static let homeTimelinePath = "/1.1/statuses/home_timeline.json"
-    static let newTweetPath = "/1.1/statuses/update.json"
-    static let likeTweetPath = "1.1/favorites/create.json"
-    static let statusesPath = "/1.1/statuses/user_timeline.json"
+    static let homeTimelinePath =       "/1.1/statuses/home_timeline.json"
+    static let mentionsTimelinePath =   "/1.1/statuses/mentions_timeline.json"
+    static let newTweetPath =           "/1.1/statuses/update.json"
+    static let likeTweetPath =          "1.1/favorites/create.json"
+    static let statusesPath =           "/1.1/statuses/user_timeline.json"
     static func retweetPath(tweetID: String?) -> String{
-      return "/1.1/statuses/retweet/\(tweetID!).json"
+      return                            "/1.1/statuses/retweet/\(tweetID!).json"
     }
     
     
@@ -107,6 +108,18 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             completion(tweets: tweets, error: nil)
         }, failure: {(operation: AFHTTPRequestOperation?, error: NSError) -> Void in
             completion(tweets: nil, error: error)
+        })
+    }
+    
+    
+    
+    
+    static func mentions(completion: (tweets: [Tweet]?, error: NSError?) -> ()){
+        TwitterClient.sharedInstance.GET(mentionsTimelinePath, parameters: nil, success: {(operation: AFHTTPRequestOperation!, resposne: AnyObject!) -> Void in
+            let tweets = Tweet.tweetsWithArray(resposne as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: {(operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                completion(tweets: nil, error: error)
         })
     }
     

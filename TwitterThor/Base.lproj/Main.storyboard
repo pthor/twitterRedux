@@ -364,12 +364,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Wod-nT-mNn">
-                        <barButtonItem key="leftBarButtonItem" title="logout" id="WAE-Um-dDN">
-                            <color key="tintColor" red="1" green="0.9756144202" blue="0.99059543179999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="onLogoutTouch:" destination="FlU-dK-9tr" id="PVa-f9-9Xt"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="uJk-H4-1or">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -544,29 +538,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yq8-cc-6aA">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yq8-cc-6aA">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuItemViewCell" rowHeight="84" id="wBV-en-TPj" customClass="MenuItemTableViewCell" customModule="TwitterThor" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wBV-en-TPj" id="4ZA-B7-572">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="83.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Green" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uC1-L4-OCc">
-                                                    <rect key="frame" x="17" y="32" width="47" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@mentions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uC1-L4-OCc">
+                                                    <rect key="frame" x="17" y="30" width="107" height="25"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="uC1-L4-OCc" firstAttribute="centerY" secondItem="4ZA-B7-572" secondAttribute="centerY" id="VUn-4I-HYr"/>
                                                 <constraint firstItem="uC1-L4-OCc" firstAttribute="leading" secondItem="4ZA-B7-572" secondAttribute="leading" constant="17" id="tDp-6c-8fW"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="menuItemLabel" destination="uC1-L4-OCc" id="sIy-Sw-28N"/>
                                         </connections>
@@ -574,7 +572,6 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Yq8-cc-6aA" firstAttribute="top" secondItem="Ofi-ff-iHX" secondAttribute="top" id="TZx-R6-aVl"/>
                             <constraint firstItem="Yq8-cc-6aA" firstAttribute="leading" secondItem="Ofi-ff-iHX" secondAttribute="leading" id="Vs7-gf-rnN"/>
@@ -590,15 +587,15 @@
             </objects>
             <point key="canvasLocation" x="2255" y="-2128"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Mentions-->
         <scene sceneID="4Gn-PN-898">
             <objects>
-                <viewController id="ojL-6L-eUx" customClass="ProfileViewController" customModule="TwitterThor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="ojL-6L-eUx" customClass="ProfileViewController" customModule="TwitterThor" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YWZ-Sb-2FP"/>
                         <viewControllerLayoutGuide type="bottom" id="HWj-Ih-NcC"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9xT-TY-cgI">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="9xT-TY-cgI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -621,17 +618,17 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileHeaderTableViewCell" rowHeight="200" id="eZS-Py-G10" customClass="ProfileHeaderTableViewCell" customModule="TwitterThor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="200"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileHeaderTableViewCell" rowHeight="100" id="eZS-Py-G10" customClass="ProfileHeaderTableViewCell" customModule="TwitterThor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="eZS-Py-G10" id="ffD-dV-XFS">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ic1-6R-Wyo">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="501"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="200" id="zIA-vm-vft"/>
+                                                        <constraint firstAttribute="height" constant="100" id="zIA-vm-vft"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -644,7 +641,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileDetailsTableViewCell" rowHeight="103" id="2H6-YA-O6W" customClass="ProfileDetailsTableViewCell" customModule="TwitterThor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="228" width="600" height="103"/>
+                                        <rect key="frame" x="0.0" y="128" width="600" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2H6-YA-O6W" id="E1C-Dp-l0g">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
@@ -722,7 +719,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BasicTweetTableViewCell" rowHeight="103" id="5Rd-6O-OLB" customClass="BasicTweetTableViewCell" customModule="TwitterThor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="331" width="600" height="103"/>
+                                        <rect key="frame" x="0.0" y="231" width="600" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5Rd-6O-OLB" id="U5s-nR-lvd">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
@@ -870,7 +867,7 @@
                             <constraint firstItem="dRD-uk-jFu" firstAttribute="top" secondItem="YWZ-Sb-2FP" secondAttribute="bottom" id="tP9-le-ja1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="GNA-c0-RFc">
+                    <navigationItem key="navigationItem" title="Mentions" id="GNA-c0-RFc">
                         <barButtonItem key="rightBarButtonItem" title="Tweet" id="fLD-j2-1rW"/>
                     </navigationItem>
                     <connections>
@@ -942,10 +939,10 @@
             </objects>
             <point key="canvasLocation" x="1605" y="692"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Profile Navigation View Controller-->
         <scene sceneID="mV6-ol-1cj">
             <objects>
-                <navigationController storyboardIdentifier="BlueNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="1YF-ZP-q8R" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="1YF-ZP-q8R" customClass="ProfileNavigationViewController" customModule="TwitterThor" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fUq-Ej-GZ0">

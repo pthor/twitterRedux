@@ -47,6 +47,10 @@ class User: NSObject {
         TwitterClient.statusesForScreenanme(screenname!, completion: completion)
     }
     
+    func mentions(completion: (tweets: [Tweet]?, error: NSError?)-> ()){
+        TwitterClient.mentions(completion)
+    }
+    
     static func logout(){
         currentUser = nil
         TwitterClient.logout()

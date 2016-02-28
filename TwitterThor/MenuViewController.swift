@@ -10,14 +10,18 @@ import UIKit
 
 class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private var tweetsNavigationController: UIViewController!
-    private var blueNavigationController: UIViewController!
-    private var pinkNavigationController: UIViewController!
+    private var profileNavigationController: UIViewController!
+    private var mentionsNavigationController: UIViewController!
+    static let mentionsMenuTitle = "@mentions"
+    static let logoutMenuTitle = "signout"
+    static let profiletMenuTitle = "profile"
+    static let twitterFeedMenuTitle = "home"
     
     var hamburgerViewController: HambergerViewController!
     
     @IBOutlet weak var tableView: UITableView!
     
-    var data = ["Home","Profile","Red"]
+    var data = [twitterFeedMenuTitle,profiletMenuTitle, mentionsMenuTitle, logoutMenuTitle]
     
     var viewControllers: [UIViewController] = []
     
@@ -28,13 +32,15 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = UIColor.darkGrayColor()
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tweetsNavigationController = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavigationController")
-        blueNavigationController  = storyBoard.instantiateViewControllerWithIdentifier("BlueNavigationController")
-        pinkNavigationController  = storyBoard.instantiateViewControllerWithIdentifier("PinkNavigationController")
+        profileNavigationController  = storyBoard.instantiateViewControllerWithIdentifier("ProfileViewController")
+        mentionsNavigationController  = storyBoard.instantiateViewControllerWithIdentifier("ProfileNavigationController")
         
         viewControllers.append(tweetsNavigationController)
-        viewControllers.append(blueNavigationController)
-        viewControllers.append(pinkNavigationController)
+        viewControllers.append(profileNavigationController)
+        viewControllers.append(mentionsNavigationController)
         
         hamburgerViewController.contentViewController = tweetsNavigationController
     }
@@ -55,9 +61,34 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        hamburgerViewController.contentViewController = viewControllers[indexPath.row]
-       // hamburgerViewController.contentViewController = viewControllers[indexPath.row]
+        if( MenuViewController.mentionsMenuTitle == data[indexPath.row]){
+            let menttionsVC =  viewControllers[indexPath.row] as! ProfileNavigationViewController
+            menttionsVC.user = User.currentUser
+            menttionsVC.showMentions = true
+            print("show mentions")
+            hamburgerViewController.contentViewController = menttionsVC
+
+        }
+        if( MenuViewController.profiletMenuTitle == data[indexPath.row]){
+            let profileVC =  viewControllers[indexPath.row] as! ProfileViewController
+            //let profileNavigationVC = profileVC.navigationController as! ProfileNavigationViewController
+            profileVC.user = User.currentUser
+            print("Profile mentions")
+            hamburgerViewController.contentViewController = profileVC
+
+        }
+        else if(MenuViewController.logoutMenuTitle == data[indexPath.row]){
+            print("log out menu item clicked")
+            User.logout()
+        }
+        else{
+            hamburgerViewController.contentViewController = viewControllers[indexPath.row]
+        }
         
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+            //cell.backgroundColor = UIColor.blueColor()
     }
     
 
