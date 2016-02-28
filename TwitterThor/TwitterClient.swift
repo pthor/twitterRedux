@@ -25,10 +25,12 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     static let homeTimelinePath = "/1.1/statuses/home_timeline.json"
     static let newTweetPath = "/1.1/statuses/update.json"
     static let likeTweetPath = "1.1/favorites/create.json"
+    static let statusesPath = "/1.1/statuses/user_timeline.json"
     static func retweetPath(tweetID: String?) -> String{
-        print("/1.1/statuses/retweet/\(tweetID!).json")
       return "/1.1/statuses/retweet/\(tweetID!).json"
     }
+    
+    
     
     var loginCompletionBlock: ((user: User?, error: NSError?) -> ())?
     
@@ -105,6 +107,15 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             completion(tweets: tweets, error: nil)
         }, failure: {(operation: AFHTTPRequestOperation?, error: NSError) -> Void in
             completion(tweets: nil, error: error)
+        })
+    }
+    
+    static func statusesForScreenanme(screenName: String, completion: (tweets: [Tweet]?, error: NSError?) -> ()){
+        TwitterClient.sharedInstance.GET(statusesPath, parameters: ["screenName": screenName], success: {(operation: AFHTTPRequestOperation!, resposne: AnyObject!) -> Void in
+            let tweets = Tweet.tweetsWithArray(resposne as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: {(operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                completion(tweets: nil, error: error)
         })
     }
     

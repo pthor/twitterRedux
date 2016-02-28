@@ -17,7 +17,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
     
-    var data = ["Home","Blue","Red"]
+    var data = ["Home","Profile","Red"]
     
     var viewControllers: [UIViewController] = []
     

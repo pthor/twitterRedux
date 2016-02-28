@@ -37,11 +37,6 @@ class Tweet: NSObject {
         retweeted = dictionary["retweeted"] as! Bool
         favouritesCount = dictionary["favorite_count"] != nil ? "\(dictionary["favorite_count"]!)" : ""
         retweetCount = dictionary["retweet_count"] != nil ? "\(dictionary["retweet_count"]!)" : ""
-//        print("did user like tweet \(id_str): \(liked)?")
-//        print("did user retweet \(id_str): \(retweeted)?")
-//        print("\(dictionary["favorite_count"]) favorite_count")
-//        print("\(dictionary["retweet_count"]) retweet_count")
-        
         
     }
     

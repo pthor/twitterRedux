@@ -21,15 +21,30 @@ class User: NSObject {
     var profileImageUrl: String?
     var tagline: String?
     var dictionary: NSDictionary?
+    var numFollowers: Int?
+    var numFollowing: Int?
+    var profile_banner_url: String?
+    var statuses_count: Int?
+    
+    var tweets:[Tweet]?
     
     
     init(dictionary: NSDictionary){
-        self.dictionary = dictionary
-
-        name = dictionary["name"] as? String
-        screenname = dictionary["screen_name"] as? String
-        profileImageUrl = dictionary["profile_image_url"] as? String
-        tagline = dictionary["description"] as? String
+        self.dictionary     = dictionary
+        //print("user dictionary \(self.dictionary)")
+        name                = dictionary["name"] as? String
+        screenname          = dictionary["screen_name"] as? String
+        profileImageUrl     = dictionary["profile_image_url"] as? String
+        profile_banner_url  = dictionary["profile_banner_url"] as? String
+        tagline             = dictionary["description"] as? String
+        numFollowing        = dictionary["friends_count"] as? Int
+        numFollowers        = dictionary["followers_count"] as? Int
+        statuses_count      = dictionary["statuses_count"] as? Int
+        
+    }
+    
+    func statuses(completion: (tweets: [Tweet]?, error: NSError?)-> ()){
+        TwitterClient.statusesForScreenanme(screenname!, completion: completion)
     }
     
     static func logout(){
