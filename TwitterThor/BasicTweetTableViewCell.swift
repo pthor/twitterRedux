@@ -46,6 +46,10 @@ class BasicTweetTableViewCell: UITableViewCell {
                 }
                 
             }
+            
+            let tap = UITapGestureRecognizer(target: self, action: "onImageTap")
+            tweetUserAvatarImage.addGestureRecognizer(tap)
+            tweetUserAvatarImage.userInteractionEnabled = true
         }
     }
     
@@ -58,6 +62,7 @@ class BasicTweetTableViewCell: UITableViewCell {
     @IBOutlet weak var likesCountLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
+    weak var navigationController: UINavigationController!
     
     @IBAction func onLikeButtonTap(sender: AnyObject) {
         User.likeTweet(tweet)
@@ -78,6 +83,18 @@ class BasicTweetTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func onImageTap(){
+        print("TAP IT IN HAPPY JUST TAP IT IN")
+        //let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as LoginViewController
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        if let userProfileController  = storyBoard.instantiateViewControllerWithIdentifier("ProfileViewController") as? ProfileViewController{
+            userProfileController.user = self.tweet.user
+            userProfileController.showMentions = false
+            print("PUSH TO NEW VIEW FOR USER \(self.tweet.user?.screenname)")
+            self.navigationController?.pushViewController(userProfileController, animated: true)
+        }
     }
 
 }

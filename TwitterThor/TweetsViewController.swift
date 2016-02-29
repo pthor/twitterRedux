@@ -63,6 +63,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
+
     func customizeNavbar(){
         let nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.Default
@@ -95,6 +96,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let tweetCell = tableView.dequeueReusableCellWithIdentifier("BasicTweetTableViewCell", forIndexPath: indexPath) as UITableViewCell
  as! BasicTweetTableViewCell
         tweetCell.tweet = tweets![indexPath.row]
+        tweetCell.navigationController = self.navigationController
         return tweetCell
     }
     

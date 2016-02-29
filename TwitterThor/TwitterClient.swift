@@ -107,6 +107,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             let tweets = Tweet.tweetsWithArray(resposne as! [NSDictionary])
             completion(tweets: tweets, error: nil)
         }, failure: {(operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+            print("TwitterClient.homeTimelineWithParams FAILED. \(error.localizedDescription)")
             completion(tweets: nil, error: error)
         })
     }
@@ -115,19 +116,24 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     
     
     static func mentions(completion: (tweets: [Tweet]?, error: NSError?) -> ()){
+        print("TwitterClient.mentions")
         TwitterClient.sharedInstance.GET(mentionsTimelinePath, parameters: nil, success: {(operation: AFHTTPRequestOperation!, resposne: AnyObject!) -> Void in
             let tweets = Tweet.tweetsWithArray(resposne as! [NSDictionary])
             completion(tweets: tweets, error: nil)
             }, failure: {(operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("TwitterClient.mentions FAILED. \(error.localizedDescription)")
                 completion(tweets: nil, error: error)
         })
     }
     
     static func statusesForScreenanme(screenName: String, completion: (tweets: [Tweet]?, error: NSError?) -> ()){
-        TwitterClient.sharedInstance.GET(statusesPath, parameters: ["screenName": screenName], success: {(operation: AFHTTPRequestOperation!, resposne: AnyObject!) -> Void in
+        print("TwitterClient.statusesForScreenanme")
+        TwitterClient.sharedInstance.GET(statusesPath, parameters: ["screen_name": screenName], success: {(operation: AFHTTPRequestOperation!, resposne: AnyObject!) -> Void in
+            print("GET \(statusesPath) with params screenName:\(screenName)")
             let tweets = Tweet.tweetsWithArray(resposne as! [NSDictionary])
             completion(tweets: tweets, error: nil)
             }, failure: {(operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("TwitterClient.statusesForScreenanme FAILED. \(error.localizedDescription)")
                 completion(tweets: nil, error: error)
         })
     }

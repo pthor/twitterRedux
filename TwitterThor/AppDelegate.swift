@@ -17,6 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        let shadow: NSShadow = NSShadow()
+        shadow.shadowColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)
+        shadow.shadowOffset = CGSizeMake(0, 1)
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSBackgroundColorAttributeName : UIColor(red: 0.0 / 255.0, green: 172.0 / 255.0, blue: 237.0 / 255.0, alpha: 1.0)]
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        
          //Override point for customization after application launch.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutnNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLogin", name: userDidLogInNotification, object: nil)

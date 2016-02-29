@@ -33,11 +33,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
 
         }
         if(self.user == nil){
+            print("set user to current user")
             self.user = User.currentUser
         }
         
         if showMentions{
-            self.title = "@\(user?.screenname!)"
+            self.title = "mentions @\(user!.screenname!)"
+        }else{
+            self.title = user!.screenname
         }
         
         configTableView()
@@ -98,9 +101,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         if(showMentions){
+            print("Display mentions on profile")
              user!.mentions(successBlock)
         }else{
-            user!.statuses(successBlock)
+            print("display \(self.user?.screenname)'s tweets")
+            user!.statuses(successBlock, forUser: self.user!)
         }
     }
     
@@ -122,6 +127,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
                 as! BasicTweetTableViewCell
             //TODO this would be better managed by having table sections
             cell.tweet = tweets[indexPath.row - 1]
+            cell.navigationController = self.navigationController
             return cell
         }
         

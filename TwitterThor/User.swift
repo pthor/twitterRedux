@@ -44,10 +44,17 @@ class User: NSObject {
     }
     
     func statuses(completion: (tweets: [Tweet]?, error: NSError?)-> ()){
+        print("User.statuses")
         TwitterClient.statusesForScreenanme(screenname!, completion: completion)
     }
     
+    func statuses(completion: (tweets: [Tweet]?, error: NSError?)-> (), forUser user:User){
+        print("User.statuses for \(user.screenname!)")
+        TwitterClient.statusesForScreenanme(user.screenname!, completion: completion)
+    }
+    
     func mentions(completion: (tweets: [Tweet]?, error: NSError?)-> ()){
+        print("mentions")
         TwitterClient.mentions(completion)
     }
     
