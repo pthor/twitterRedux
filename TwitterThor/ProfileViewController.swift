@@ -237,7 +237,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             self.blurEffectView.alpha = 0
         }
         
-        let userHeaderHeight = pullDistance + 270
+        let userHeaderHeight = pullDistance + 170
         self.bannerBackgroundImageView.frame = CGRectMake(0 , 0, self.view.frame.width, userHeaderHeight)
         
         print("pullDistance \(pullDistance), pullRatio: \(pullRatio), midX: (midX), refreshing: \(self.refreshControl!.refreshing)")

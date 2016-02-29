@@ -21,7 +21,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableView: UITableView!
     
-    var data = [twitterFeedMenuTitle,profiletMenuTitle, mentionsMenuTitle, logoutMenuTitle]
+    var data = [profiletMenuTitle, twitterFeedMenuTitle, mentionsMenuTitle, logoutMenuTitle]
     
     var viewControllers: [UIViewController] = []
     
@@ -32,27 +32,32 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundColor = UIColor(red: 0.0 / 255.0, green: 132.0 / 255.0, blue: 180.0 / 255.0, alpha: 1.0)
-
+        tableView.backgroundColor = UIColor.darkGrayColor()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        tweetsNavigationController = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavigationController")
         profileNavigationController  = storyBoard.instantiateViewControllerWithIdentifier("ProfileViewController")
+        tweetsNavigationController = storyBoard.instantiateViewControllerWithIdentifier("TweetsNavigationController")
         mentionsNavigationController  = storyBoard.instantiateViewControllerWithIdentifier("ProfileNavigationController")
         
-        viewControllers.append(tweetsNavigationController)
         viewControllers.append(profileNavigationController)
+        viewControllers.append(tweetsNavigationController)
         viewControllers.append(mentionsNavigationController)
         
         hamburgerViewController.contentViewController = tweetsNavigationController
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //let cell = UITableViewCell(style: .Default, reuseIdentifier: nil) as? MenuItemTableViewCell
-        let cell = tableView.dequeueReusableCellWithIdentifier("MenuItemViewCell", forIndexPath: indexPath) as UITableViewCell as! MenuItemTableViewCell
+        
+        if(indexPath.row == 0){
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserProfileMenuTableViewCell", forIndexPath: indexPath) as!  UserProfileMenuTableViewCell
+            cell.user = User.currentUser
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCellWithIdentifier("MenuItemViewCell", forIndexPath: indexPath) as UITableViewCell as! MenuItemTableViewCell
+            print(data[indexPath.row])
+            cell.menuItemLabel.text = data[indexPath.row]
+            return cell
+        }
 
-        print(data[indexPath.row])
-        cell.menuItemLabel.text = data[indexPath.row]
-        return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
